@@ -119,7 +119,7 @@ public:
 		head->next = tail;
 		tail->prev = head;
 		count = 0;
-		cout << "Default constructor called!" << endl;
+		//cout << "Default constructor called!" << endl;
 	};
 	LinkedList(const LinkedList<T>& list){
 		Node* current = list.head;
