@@ -1,32 +1,35 @@
 #pragma once
 #include <iostream>
-using namespace std;
 
 template <typename T>
 class LinkedList {
 	struct Node {
 		T data;
-		Node* prev;
-		Node* next;
+		Node* prev = nullptr;
+		Node* next = nullptr;
 	};
 public:
 
 	// Behaviors
 	void printForward() const{
-		Node* current = head;
-		for (int i = 0; i < getCount(); i++){
-			cout << current->data << " ";
-			current = current->next;
+		if (head != nullptr) {
+			Node* current = head;
+			for (int i = 0; i < getCount(); i++){
+				std::cout << current->data << " ";
+				current = current->next;
+			}
+			std::cout << std::endl;
 		}
-		cout << endl;
 	};
 	void printReverse() const{
-		Node* current = tail;
-		for (int i = 0; i < getCount(); i++){
-			cout << current->data << " ";
-			current = current->prev;
+		if (tail != nullptr) {
+			Node* current = tail;
+			for (int i = 0; i < getCount(); i++){
+				std::cout << current->data << " ";
+				current = current->prev;
+			}
+			std::cout << std::endl;
 		}
-		cout << endl;
 	};
 
 	// Accessors
@@ -40,27 +43,27 @@ public:
 	void addHead(const T& data){
 		Node* newNode = new Node;
 		newNode->data = data;
-		if (count == 0) {
-			head = tail = newNode;
-		}
-		else {
-			head->prev = newNode;
-			newNode->next = head;
-			head = newNode;
-		}
+
+		newNode->prev = nullptr;
+		newNode->next = head;
+
+		if (count == 0) tail = newNode;
+		else head->prev = newNode;
+
+		head = newNode;
 		count++;
 	};
 	void addTail(const T& data){
 		Node* newNode = new Node;
 		newNode->data = data;
-		if (count == 0) {
-			head = tail = newNode;
-		}
-		else {
-			newNode->prev = tail;
-			tail->next = newNode;
-			tail = newNode;
-		}
+
+		newNode->prev = tail;
+		newNode->next = nullptr;
+
+		if (count == 0) head = newNode;
+		else tail->next = newNode;
+
+		tail = newNode;
 		count++;
 	};
 
@@ -79,8 +82,11 @@ public:
 		count--;
 	};
 	void clear(){
-		for (int i = 0; i < getCount(); i++) removeHead();
-		tail = nullptr;
+		while (head != nullptr) {
+			Node* nextPtr = head->next;
+			delete head;
+			head = nextPtr;
+		}
 		count = 0;
 	};
 
@@ -113,14 +119,8 @@ public:
 	};
 
 	// Construction/Destruction
-	LinkedList(){
-		head = new Node();
-		tail = new Node();
-		head->next = tail;
-		tail->prev = head;
-		count = 0;
-		//cout << "Default constructor called!" << endl;
-	};
+	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
+
 	LinkedList(const LinkedList<T>& list){
 		Node* current = list.head;
 		count = 0;
@@ -140,8 +140,6 @@ public:
 	};
 	~LinkedList(){
 		clear();
-		delete head;
-		delete tail;
 	};
 
 private:
