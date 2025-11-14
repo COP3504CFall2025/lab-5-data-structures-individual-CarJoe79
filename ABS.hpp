@@ -85,19 +85,18 @@ public:
 
     // Push item onto the stack
     void push(const T& data) override {
-        if (curr_size_ == capacity_ - 1) capacity_ *= scale_factor_;
-        array_[curr_size_] = data;
-        curr_size_++;
+        if (curr_size_ == capacity_) capacity_ *= scale_factor_;
+        *(array_ + ++curr_size_ - 1) = data;
     };
 
     T peek() const override {
         if (curr_size_ == 0) throw std::runtime_error("");
-        return array_[0];
+        return *array_;
     };
 
     T pop() override {
         if (curr_size_ == 0) throw std::runtime_error("");
-        T value = array_[--curr_size_];
+        T value = *(array_ + --curr_size_);
         if (curr_size_ <= capacity_ / 4) capacity_ /= scale_factor_;
         return value;
     };

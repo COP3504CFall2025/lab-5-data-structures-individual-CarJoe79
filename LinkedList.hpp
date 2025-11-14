@@ -91,6 +91,7 @@ public:
 			delete head;
 			head = nextPtr;
 		}
+		tail = nullptr;
 		count = 0;
 	};
 
