@@ -99,7 +99,6 @@ public:
         if (curr_size_ == 0) throw std::runtime_error("");
         T value = array_[--curr_size_];
         if (curr_size_ <= capacity_ / 4) capacity_ /= scale_factor_;
-        curr_size_--;
         return value;
     };
 
