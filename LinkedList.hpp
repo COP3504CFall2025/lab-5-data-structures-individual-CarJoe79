@@ -130,7 +130,7 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 
 	LinkedList(const LinkedList<T>& list){
-		Node* current = list.tail;
+		Node* current = list.head;
 		count = 0;
 		for (int i = 0; i < list.getCount(); i++) {
 			addHead(current->data);
