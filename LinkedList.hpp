@@ -74,6 +74,7 @@ public:
 		delete head;
 		head = tempPtr;
 		count--;
+		if (count == 0) tail = nullptr;
 		return true;
 	};
 	bool removeTail(){
@@ -82,6 +83,7 @@ public:
 		delete tail;
 		tail = tempPtr;
 		count--;
+		if (count == 0) head = nullptr;
 		return true;
 	};
 	void clear(){
