@@ -102,6 +102,8 @@ public:
 	};
 
 	// Operators
+	// I was reversing my copied lists. I am really dumb for not printing them
+	// after making copies in my own testing lmao
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
 		if (this != &other){
 			clear();
