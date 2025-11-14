@@ -130,12 +130,12 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 
 	LinkedList(const LinkedList<T>& list){
-		Node* current = list.head;
+		Node* current = list.tail;
 		count = 0;
 		for (int i = 0; i < list.getCount(); i++) {
-			addTail(current->data);
+			addHead(current->data);
 			current = current->next;
-			if (i == 0) head = tail;
+			if (i == 0) tail = head;
 		}
 	};
 	LinkedList(LinkedList<T>&& other) noexcept{
