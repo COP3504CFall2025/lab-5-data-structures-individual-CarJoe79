@@ -20,6 +20,7 @@ public:
 
     // Deletion
     T pop() override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLS");
         T item = list.getHead()->data;
         list.removeHead();
         return item;
@@ -27,6 +28,7 @@ public:
 
     // Access
     T peek() const override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLS");
         return list.getHead()->data;
     };
 

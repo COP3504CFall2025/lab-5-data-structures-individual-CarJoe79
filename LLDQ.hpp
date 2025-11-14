@@ -27,11 +27,13 @@ public:
 
     // Core Removal Operations
     T popFront() override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLDQ");
         T item = list.getHead();
         list.removeHead();
         return item;
     };
     T popBack() override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLDQ");
         T item = list.getTail();
         list.removeTail();
         return item;
@@ -39,9 +41,11 @@ public:
 
     // Element Accessors
     const T& front() const override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLDQ");
         return list.getHead()->data;
     };
     const T& back() const override {
+        if (list.getCount() == 0) throw std::out_of_range("Empty LLDQ");
         return list.getTail()->data;
     };
 
