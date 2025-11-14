@@ -102,7 +102,7 @@ public:
 
     T peek() const override {
         if (curr_size_ == 0) throw std::runtime_error("");
-        return array_[0];
+        return array_[curr_size_ - 1];
     };
 
     T pop() override {
