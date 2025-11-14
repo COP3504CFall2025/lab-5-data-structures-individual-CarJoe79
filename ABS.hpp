@@ -85,7 +85,7 @@ public:
 
     // Push item onto the stack
     void push(const T& data) override {
-        if (curr_size_ == capacity_) capacity_ *= scale_factor_;
+        if (curr_size_ == capacity_ - 1) capacity_ *= scale_factor_;
         array_[curr_size_] = data;
         curr_size_++;
     };

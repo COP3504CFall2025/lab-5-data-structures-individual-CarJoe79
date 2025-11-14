@@ -68,18 +68,22 @@ public:
 	};
 
 	// Removal
-	void removeHead(){
+	bool removeHead(){
+		if (count == 0) return false;
 		Node* tempPtr = head->next;
 		delete head;
 		head = tempPtr;
 		count--;
+		return true;
 	};
-	void removeTail(){
+	bool removeTail(){
+		if (count == 0) return false;
 		Node* tempPtr = tail->prev;
 		delete tail;
 		tail = tempPtr;
 		tail->next = nullptr;
 		count--;
+		return true;
 	};
 	void clear(){
 		while (head != nullptr) {
