@@ -70,22 +70,22 @@ public:
 	// Removal
 	bool removeHead(){
 		if (count == 0) return false;
-		Node* tempPtr = head->next;
-		delete head;
-		head = tempPtr;
-		head->prev = nullptr;
+		Node* tempPtr = head;
+		head = head->next;
+		delete tempPtr;
 		count--;
-		if (count == 0) tail = nullptr;
+		if (head != nullptr) head->prev = nullptr;
+		else tail = nullptr;
 		return true;
 	};
 	bool removeTail(){
 		if (count == 0) return false;
-		Node* tempPtr = tail->prev;
-		delete tail;
-		tail = tempPtr;
-		tail->next = nullptr;
+		Node* tempPtr = tail;
+		tail = tail->prev;
+		delete tempPtr;
 		count--;
-		if (count == 0) head = nullptr;
+		if (tail != nullptr) tail->next = nullptr;
+		else head = nullptr;
 		return true;
 	};
 	void clear(){
@@ -117,9 +117,8 @@ public:
 			clear();
 			Node* current = rhs.head;
 			for (int i = 0; i < rhs.getCount(); i++) {
-				addHead(current->data);
+				addTail(current->data);
 				current = current->next;
-				if (i == 0) tail = head;
 			}
 		}
 
@@ -133,9 +132,8 @@ public:
 		Node* current = list.head;
 		count = 0;
 		for (int i = 0; i < list.getCount(); i++) {
-			addHead(current->data);
+			addTail(current->data);
 			current = current->next;
-			if (i == 0) tail = head;
 		}
 	};
 	LinkedList(LinkedList<T>&& other) noexcept{
