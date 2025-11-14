@@ -85,9 +85,18 @@ public:
 
     // Push item onto the stack
     void push(const T& data) override {
-        if (curr_size_ == capacity_) capacity_ *= scale_factor_;
-        else if (curr_size_ == 0) *array_ = data;
-        else *(array_ + curr_size_) = data;
+        if (curr_size_ == capacity_) {
+            capacity_ *= scale_factor_;
+            T* new_array_ = new T[capacity_];
+
+            for (size_t i = 0; i < curr_size_; i++) new_array_[i] = array_[i];
+
+            delete[] array_;
+
+            array_ = new_array_;
+        }
+        else if (curr_size_ == 0) array_[0] = data;
+        array_[curr_size_] = data;
         curr_size_++;
     };
 
@@ -98,8 +107,17 @@ public:
 
     T pop() override {
         if (curr_size_ == 0) throw std::runtime_error("");
-        T value = *(array_ + --curr_size_);
-        if (curr_size_ <= capacity_ / 4) capacity_ /= scale_factor_;
+        T value = array_[--curr_size_];
+        if (curr_size_ <= capacity_ / 4) {
+            capacity_ /= scale_factor_;
+            T* new_array_ = new T[capacity_];
+
+            for (size_t i = 0; i < curr_size_; i++) new_array_[i] = array_[i];
+
+            delete[] array_;
+
+            array_ = new_array_;
+        }
         return value;
     };
 
