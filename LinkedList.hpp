@@ -73,6 +73,7 @@ public:
 		Node* tempPtr = head->next;
 		delete head;
 		head = tempPtr;
+		head->prev = nullptr;
 		count--;
 		if (count == 0) tail = nullptr;
 		return true;
@@ -82,6 +83,7 @@ public:
 		Node* tempPtr = tail->prev;
 		delete tail;
 		tail = tempPtr;
+		tail->next = nullptr;
 		count--;
 		if (count == 0) head = nullptr;
 		return true;
