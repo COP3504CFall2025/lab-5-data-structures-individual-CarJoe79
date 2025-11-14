@@ -104,7 +104,7 @@ public:
     // Access
     T peek() const override {
         if (curr_size_ == 0) throw std::runtime_error("");
-        return array_[curr_size_ - 1];
+        return array_[0];
     };
 
     // Deletion
