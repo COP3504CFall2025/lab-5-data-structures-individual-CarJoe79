@@ -81,7 +81,6 @@ public:
 		Node* tempPtr = tail->prev;
 		delete tail;
 		tail = tempPtr;
-		tail->next = nullptr;
 		count--;
 		return true;
 	};
