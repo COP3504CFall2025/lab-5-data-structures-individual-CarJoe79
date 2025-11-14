@@ -177,8 +177,14 @@ public:
     };
 
     // Access
-    const T& front() const override {return data_[front_];};
-    const T& back() const override {return data_[back_];};
+    const T& front() const override {
+        if (size_ == 0) throw std::runtime_error("");
+        return data_[front_];
+    };
+    const T& back() const override {
+        if (size_ == 0) throw std::runtime_error("");
+        return data_[back_];
+    };
 
     // Getters
     std::size_t getSize() const noexcept override {return size_;};
