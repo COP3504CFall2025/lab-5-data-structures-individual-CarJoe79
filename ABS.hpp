@@ -42,8 +42,11 @@ public:
         for (size_t i = 0; i < rhs.capacity_; i++) this->array_[i] = rhs.array_[i];
         return *this;
     };
-    ABS(ABS&& other) noexcept :
-    array_(other.array_), capacity_(other.capacity_), curr_size_(other.curr_size_){
+    ABS(ABS&& other) noexcept {
+        capacity_ = other.capacity_;
+        curr_size_ = other.curr_size_;
+        array_ = other.array_;
+
         other.array_ = nullptr;
         other.curr_size_ = 0;
         other.capacity_ = 0;
@@ -84,17 +87,19 @@ public:
     void push(const T& data) override {
         if (curr_size_ == capacity_) capacity_ *= scale_factor_;
         array_[curr_size_] = data;
+        curr_size_++;
     };
 
     T peek() const override {
-        if (curr_size_ == 0) throw std::out_of_range("Empty ABS");
+        if (curr_size_ == 0) throw std::runtime_error("");
         return array_[0];
     };
 
     T pop() override {
-        if (curr_size_ == 0) throw std::out_of_range("Empty ABS");
+        if (curr_size_ == 0) throw std::runtime_error("");
         T value = array_[--curr_size_];
         if (curr_size_ <= capacity_ / 4) capacity_ /= scale_factor_;
+        curr_size_--;
         return value;
     };
 
