@@ -68,6 +68,9 @@ public:
 	};
 
 	// Removal
+	// I used CodeHelp to figure out why these weren't working in order to realize
+	// how dumb my previous implementation was. I know that's not like copy/pasting
+	// but I thought I should still cite my sources
 	bool removeHead(){
 		if (count == 0) return false;
 		Node* tempPtr = head;
