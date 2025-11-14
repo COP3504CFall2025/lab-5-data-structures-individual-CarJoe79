@@ -131,9 +131,9 @@ public:
 		Node* current = list.head;
 		count = 0;
 		for (int i = 0; i < list.getCount(); i++) {
-			addHead(current->data);
+			addTail(current->data);
 			current = current->next;
-			if (i == 0) tail = head;
+			if (i == 0) head = tail;
 		}
 	};
 	LinkedList(LinkedList<T>&& other) noexcept{
