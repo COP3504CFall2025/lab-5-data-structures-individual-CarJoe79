@@ -159,8 +159,7 @@ public:
     };
     T popBack() override {
         if (size_ == 0) throw std::runtime_error("");
-        T value = data_[0];
-        data_[back_] = value;
+        T value = data_[back_];
         size_--;
         back_--;
         if (size_ <= capacity_ / 4) {
